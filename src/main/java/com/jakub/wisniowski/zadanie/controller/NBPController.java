@@ -1,9 +1,11 @@
 package com.jakub.wisniowski.zadanie.controller;
 
-import com.jakub.wisniowski.zadanie.service.Currency;
 import com.jakub.wisniowski.zadanie.service.NBPService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 
@@ -11,17 +13,17 @@ import java.math.BigDecimal;
 public class NBPController {
 
     @Autowired
-    NBPService nbpService;
+    private NBPService nbpService;
 
-    /*@RequestMapping(value = ["/"], method = [RequestMethod.GET])
-    @RequestParam("amount", required = true) BigDecimal amountGiven,
-    @RequestParam("amount", required = true) BigDecimal amountResult,
-    @RequestParam("currency", required = false) Currency currency,
+    @GetMapping(value = "/rate")
+    public @ResponseBody
+    Double getCurrency(
+            @RequestParam("amountGiven") BigDecimal amountGiven,
+            @RequestParam("currencyGiven") String currencyGiven,
+            @RequestParam("currencyResult") String currencyResult) {
 
-    public CurrencyNbp getCurrency(@PathVariable Integer id) {
-
-        return personService.getPerson(id);
-    }*/
-
+        return nbpService.getAmountInGivenCurrency(amountGiven, currencyGiven, currencyResult);
+    }
 
 }
+
