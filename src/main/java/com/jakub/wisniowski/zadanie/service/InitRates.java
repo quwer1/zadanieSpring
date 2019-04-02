@@ -1,27 +1,26 @@
 package com.jakub.wisniowski.zadanie.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Component
-public class ScheduleService {
-
+public class InitRates {
     @Autowired
     private NBPApiService nbpApiService;
 
     @Autowired
     private CacheService cacheService;
 
-    private static final Logger LOGGER = Logger.getLogger(ScheduleService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(InitRates.class.getName());
 
-    @Scheduled(cron = "0 15 10 15 * ?")
-    public void refreshCache() {
-        LOGGER.info("update  data download fx rates from NBP at " + System.currentTimeMillis());
+    @PostConstruct
+    public void init() {
         List<Rate> rates = nbpApiService.invokeApi();
         cacheService.fillCurrency(rates);
+        LOGGER.info("init data download fx rates from NBP");
     }
 }

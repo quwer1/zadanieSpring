@@ -26,7 +26,6 @@ public class NBPApiService {
 
         ResponseEntity<String> response = restTemplate.getForEntity(URL, String.class);
 
-
         JSONArray obj = new JSONArray(response.getBody());
         JSONArray arrayRate = obj.getJSONObject(0).getJSONArray("rates");
 
@@ -40,8 +39,5 @@ public class NBPApiService {
         }
 
         return rates;
-
-
     }
-
 }

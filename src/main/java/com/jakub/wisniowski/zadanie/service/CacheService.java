@@ -13,11 +13,9 @@ public class CacheService {
 
     public void fillCurrency(List<Rate> rates) {
         currency.clear();
-
         for (Rate rate : rates) {
             currency.put(rate.getCurrencyCode(), rate);
         }
-
     }
 
     public BigDecimal rateForCurrency(String currencyCode) {
