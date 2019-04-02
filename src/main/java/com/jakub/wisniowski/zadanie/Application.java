@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
+
 @EnableScheduling
 @SpringBootApplication
 public class Application {
@@ -15,6 +17,7 @@ public class Application {
     }
 
     @Bean
+    @PostConstruct
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
